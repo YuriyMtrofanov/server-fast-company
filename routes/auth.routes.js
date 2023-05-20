@@ -39,8 +39,8 @@ router.post("/signUp", [
             }
             const hashedPassword = await bcrypt.hash(password, sold = 12) // 3. Создание хешированного пароля
             const newUser = await User.create({ // 4. Создание пользователя. Важно именно в таком порядке передавать данные
-                ...generateUserData(),
-                ...req.body,
+                ...generateUserData(),          // затычка для данных, которые мы не передаем
+                ...req.body,                    // передаваемые вместе с запросом данные
                 password: hashedPassword
             })
             const tokens = tokenService.generate({_id: newUser._id}); // 5. Сгенерировать JWT token и Refresh toket

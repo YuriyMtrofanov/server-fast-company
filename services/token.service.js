@@ -2,9 +2,8 @@ const JWT = require("jsonwebtoken");
 const config = require("config");
 const Token = require("../models/Token");
 
-
 class TokenService {
-    // return: accessToken, refreshToken, expiresIn
+    // возвращает: accessToken, refreshToken, expiresIn
     generate(payload) { // в auth.routes мы передаем {_id: newUser._id}
         const accessToken = JWT.sign(payload, config.get("accessSecretKey"), {expiresIn: "1h"});
         const refreshToken = JWT.sign(payload, config.get("refreshSecretKey"));
@@ -26,6 +25,13 @@ class TokenService {
     validateRefresh(refreshToken) {
         try {
             return JWT.verify(refreshToken, config.get("refreshSecretKey"))
+        } catch (error) {
+            return null;
+        }
+    };
+    validateAccess(accessToken) {
+        try {
+            return JWT.verify(accessToken, config.get("accessSecretKey"))
         } catch (error) {
             return null;
         }
