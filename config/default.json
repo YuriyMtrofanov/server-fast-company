@@ -1,0 +1,6 @@
+{
+    "port": 8080,
+    "mongoUri": "mongodb+srv://Mitrofanov_Yuriy:QbRTEsxRdVLqjwyp@progectdb.34cxeex.mongodb.net/newApp?retryWrites=true&w=majority",
+    "accessSecretKey": "super secret access key",
+    "refreshSecretKey": "super secret refresh key"
+}
