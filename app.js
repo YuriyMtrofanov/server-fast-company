@@ -1,16 +1,17 @@
 const chalk = require("chalk");
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const config = require("config");
 const initDatabase = require("./startUp/initDatabase");
 const routes = require("./routes");
 
 const app = express();
-
 // устанавливаем middleware:
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", routes);
+app.use(cors());
 
 const PORT = config.get("port") ?? 8080 // с помощью config запрашиваем дефолтный порт из "./config/gefault.json"
 
