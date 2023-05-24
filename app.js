@@ -1,17 +1,18 @@
 const chalk = require("chalk");
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const config = require("config");
+const cors = require("cors");
 const initDatabase = require("./startUp/initDatabase");
 const routes = require("./routes");
 
 const app = express();
 // устанавливаем middleware:
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", routes);
-app.use(cors());
+
 
 const PORT = config.get("port") ?? 8080 // с помощью config запрашиваем дефолтный порт из "./config/gefault.json"
 
@@ -37,8 +38,6 @@ async function start(){
         console.log(chalk.red(error.message));
         process.exit(1) // В случае ошибки останавливаем работу приложения
     }
-
-
 };
 
 start();
